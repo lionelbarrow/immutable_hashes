@@ -1,6 +1,29 @@
 # ImmutableHashes
 
-Enforces that you can only assign to a hash's key once. If you *really* want the old behavior, use a MutableHash.
+Enforces that you can only assign to hash keys once.
+
+```ruby
+require "immutable_hashes"                                                          
+hash = {:my_key => "my_value"}
+hash[:my_key] = "my_other_value"
+```
+
+This raises:
+
+`ImmutableHashError: Cannot change the value of my_key to my_other_value. my_key is already set to my_value`
+
+This gem does *not* prevent you from adding keys to the hash.
+
+If you *really* want to change what keys point at, you can use a MutableHash:
+
+```ruby
+require "immutable_hashes"
+hash = MutableHash.new(:my_key => "my_value")
+hash[:my_key] = "my_other_value"
+puts hash[:my_key]
+```
+
+This prints `my_other_value`.
 
 # License
 
